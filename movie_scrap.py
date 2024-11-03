@@ -12,7 +12,7 @@ query = "{} rotten tomatoes".format(user_input)
 
 # Perform the search and iterate through the results
 first_tab = []
-for j, result in enumerate(search(query, num=10, stop=10, pause=2)):
+for j, result in enumerate(search(query, num_results=10)):
     first_tab.append(result)
 
 # Get the first search result URL
@@ -35,5 +35,6 @@ print(content_element.get_text().strip())
 
 # Extract and print the movie duration
 div_element_dur = soup.find('div', class_='media-hero-wrap')
-time_element = div_element_dur.find('rt-text', slot='duration')
+time_element = div_element_dur.find_all('rt-text', slot="metadataProp")[-1]
+#time_element =  div_element_dur.find('rt-text', slot='duration')
 print("Duration is {}".format(time_element.get_text()))
